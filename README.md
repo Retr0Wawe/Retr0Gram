@@ -1,5 +1,7 @@
 # Telegramm-Admin-Tool
 Tool for remote administration of your computer using telegram api
+## How to download:
+git clone --recursive https://github.com/Retr0Wawe/Telegram-Remote-Tool
 ## Example main:
 ```cpp
 #include "TGBotFunc.hpp"
