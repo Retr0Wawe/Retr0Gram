@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <wininet.h>
 #include <TlHelp32.h>
-#include "nlohmann/json.hpp"
+#include <nlohmann/json.hpp>
 
 #pragma comment(linker, "/SUBSYSTEM:WINDOWS")
 #pragma comment(lib, "WinInet.lib")
