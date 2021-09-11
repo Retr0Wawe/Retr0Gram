@@ -8,14 +8,16 @@ set(CMAKE_CXX_STANDARD 14)
 #add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 add_executable(${PROJECT_NAME} 
-	src/Headers.h
-	src/Requests.hpp
-	src/Telegram.hpp
-	src/TGBotFunc.hpp
-	src/Requests.cpp
-	src/Telegram.cpp
-	src/main.cpp)
+	Core/includes/Headers.h
+	Core/includes/Requests.hpp
+	Core/includes/Telegram.hpp
+	Core/includes/TGBotFunc.hpp
+	Core/src/Requests.cpp
+	Core/src/Telegram.cpp
+	Core/main.cpp)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/json)
+
+target_include_directories(${PROJECT_NAME} PUBLIC Core/includes)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json)
