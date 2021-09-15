@@ -5,7 +5,10 @@
 namespace TelegramBot
 {
 	Telegram::Telegram(const char* bot_api = nullptr, const char* chat_id = nullptr) :
-	Requests("TgHelper", "api.telegram.org", 1), bot_api(bot_api), chat_id(chat_id)
+		Requests("TgHelper", "api.telegram.org", 1), bot_api(bot_api), chat_id(chat_id)
+		{	}
+
+	Telegram::~Telegram()
 	{	}
 
 	void Telegram::Send_Message(const char* message)
@@ -68,10 +71,10 @@ namespace TelegramBot
 			//MessageBoxA(0, "Emergency termination of the program!", MB_OK, 0);
 		//	return false;
 		//}
-		//return true;
+		return true;
 	}
 
-	void Delay(float seconds)
+	void delay(double seconds)
 	{
 		Sleep(seconds * 1000);
 	}

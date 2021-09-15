@@ -12,11 +12,9 @@ namespace TelegramBot
         const char* bot_api;
         const char* chat_id;
     public:
-        Telegram(const char* bot_api, const char* chat_id)
-        {   }
+        Telegram(const char* bot_api, const char* chat_id);
 
-        ~Telegram()
-        {   }
+        ~Telegram();
 
         Telegram& operator=(const Telegram&) = delete;
         Telegram& operator=(const Telegram&&) = delete;
@@ -30,6 +28,8 @@ namespace TelegramBot
 
         void Send_Message(const char* message);
     };
+
+    void delay(double seconds);
 }
 
 #endif
