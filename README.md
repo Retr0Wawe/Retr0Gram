@@ -1,7 +1,7 @@
 # Retr0Gram
 High-level api for implementing a bot in C++ using http/https requests. 
 ## How it works?
-We send a request with parameters (our bot_token and chat_id) using the Requests class, which has a send_request method. Thus, we send a request (with parameters, and a request of the GET type) to the telegram server, receive a response and parse it for possible errors.
+
 ## How to download:
 git clone --recursive https://github.com/Retr0Wawe/Telegram-Remote-Tool
 ## Example main:
