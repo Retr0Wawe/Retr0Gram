@@ -12,7 +12,7 @@ namespace TelegramBot
         const char* bot_api;
         const char* chat_id;
     public:
-        Telegram(const char* bot_api, const char* chat_id);
+        Telegram(const char* bot_api, const char* chat_id); //bot_api, chat_id
 
         ~Telegram();
 
