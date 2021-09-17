@@ -2,8 +2,11 @@
 High-level api for implementing a bot in C++ using http/https requests. 
 ## How it works?
 
-## How to download:
+## Download:
 git clone --recursive https://github.com/Retr0Wawe/Telegram-Remote-Tool
+## Build:
+mkdir build && cd build
+cmake ..
 ## Example main:
 ```cpp
 #include <Telegram.hpp>
