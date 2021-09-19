@@ -4,6 +4,8 @@
 #include <string>
 #include <windows.h>
 
+#include "Debug.hpp"
+
 typedef void* HINTERNET;
 
 class Requests

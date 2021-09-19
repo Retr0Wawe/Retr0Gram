@@ -1,12 +1,17 @@
 #include <Telegram.hpp>
-#include <windows.h>
-#include <iostream>
+#include <iostream> 
 
 using namespace TelegramBot;
 
-int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
+#ifdef NDEBUG
+  #define main() WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
+ #else
+  #define main(...) main(__VA_ARGS__) //for argc, argv
+#endif
+
+int main()
 {
-	Telegram tg("your bot_api", "your chat_id"); 
+	Telegram tg("your bot api", "your chat id"); 
 
 	tg.Send_Message("The computer is on! Example commands:  /cmd  /exit  /shutdown  /pwd ");	//start message
 

@@ -4,9 +4,12 @@
 
 namespace TelegramBot
 {
-	Telegram::Telegram(const char* bot_api = nullptr, const char* chat_id = nullptr) :
-		Requests("TgHelper", "api.telegram.org", 1), bot_api(bot_api), chat_id(chat_id)
-		{	}
+	Telegram::Telegram(const char* bot_api, const char* chat_id) :
+	Requests("TgHelper", "api.telegram.org", 1), bot_api(bot_api), chat_id(chat_id)
+	{	
+		LOG_INFO("Your bot api: [{0}]", bot_api);
+		LOG_INFO("Your chat id: [{0}]", chat_id);
+	}
 
 	Telegram::~Telegram()
 	{	}
@@ -14,6 +17,8 @@ namespace TelegramBot
 	void Telegram::Send_Message(const char* message)
 	{
 		std::string content = "bot" + std::string(bot_api) + "/sendMessage?text=" + message + "&chat_id=" + chat_id;
+
+		LOG_INFO("Send message: '{0}'", message);
 
 		try {
 			std::string get_request = Requests::Send_Request_Get(content.c_str(), nullptr);
@@ -29,8 +34,7 @@ namespace TelegramBot
 			}
 		}
 		catch (const std::exception& ex) {
-			//std::string error_message = ex.what() + std::to_string(++error_counts);
-			//MessageBoxA(0, error_message.c_str(), MB_OK, 0);
+			LOG_WARN(ex.what());
 		}
 	}
 
@@ -45,21 +49,20 @@ namespace TelegramBot
 				throw std::runtime_error("Error to send get request! Check your internet connection! ");
 			}
 
-			nlohmann::json json_result = nlohmann::json::parse(get_request);
+			nlohmann::json parse_request = nlohmann::json::parse(get_request);
 
-			if (json_result["ok"] == false) {
-				throw std::runtime_error("Bad request: " + json_result["ok"]["result"]);
+			if (parse_request["ok"] == false) {
+				throw std::runtime_error("Bad request: " + parse_request["ok"]["result"]);
 			}
 
-			for (int i = 0; i < json_result["result"].size(); i++) {
-				if (json_result["result"][i]["message"]["from"]["id"] == atoi(chat_id)) {
-					text = json_result["result"][i]["message"]["text"];
+			for (int i = 0; i < parse_request["result"].size(); i++) {
+				if (parse_request["result"][i]["message"]["from"]["id"] == atoi(chat_id)) {
+					text = parse_request["result"][i]["message"]["text"];
 				}
 			}
 		}
 		catch (const std::exception& ex) {
-			//std::string error_message = ex.what() + std::to_string(++error_counts);
-			//MessageBoxA(0, error_message.c_str(), MB_OK, 0);
+			LOG_WARN(ex.what());
 		}
 
 		return text != past_message ? past_message = text : "";
@@ -67,10 +70,6 @@ namespace TelegramBot
 
 	bool Telegram::Check_Errors()
 	{
-		//if (error_counts >= 5 && Requests::Send_Request_Get("test", nullptr) == "") {
-			//MessageBoxA(0, "Emergency termination of the program!", MB_OK, 0);
-		//	return false;
-		//}
 		return true;
 	}
 

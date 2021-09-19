@@ -8,7 +8,7 @@ Requests::Requests(const char* useragent, const char* url, bool https = 0) : SSL
 	hSocket = InternetOpenA(useragent, INTERNET_OPEN_TYPE_PRECONFIG, 0, 0, 0);
 
 	if (!hSocket) {
-		std::cout << "Error to open connection! Error: " << GetLastError() << std::endl;
+		LOG_CRITICAL("Error to open connection! Error: {0}", GetLastError());
 		exit(1);
 	}
 
@@ -16,7 +16,7 @@ Requests::Requests(const char* useragent, const char* url, bool https = 0) : SSL
 		: INTERNET_DEFAULT_HTTP_PORT, 0, 0, INTERNET_SERVICE_HTTP, 0, 0);
 
 	if (!hConnection) {
-		std::cout << "Error to connect url! Error: " << GetLastError() << std::endl;
+		LOG_CRITICAL("Error to connect url! Error: {0}", GetLastError());
 		exit(1);
 	}
 }
@@ -43,7 +43,7 @@ std::string Requests::Send_Request_Get(const char* path, const char* content) co
 		INTERNET_FLAG_RELOAD | INTERNET_FLAG_KEEP_CONNECTION, 1);
 
 	if (!hRequest) {
-		std::cout << "Error to open request! Error: " << GetLastError() << std::endl;
+		LOG_CRITICAL("Error to open request! Error: {0}", GetLastError());
 		exit(1);
 	}
 
