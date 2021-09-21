@@ -15,6 +15,12 @@ private:
 	HINTERNET hConnection;
 	bool SSL;
 public:
+	Requests& operator=(const Requests&) = delete;
+	Requests& operator=(const Requests&&) = delete;
+
+	Requests(const Requests&) = delete;
+	Requests(Requests&&) = delete;
+public:
 	Requests(const char* useragent, const char* url, bool https);
 
 	Requests();

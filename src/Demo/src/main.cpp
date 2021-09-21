@@ -11,11 +11,11 @@ using namespace TelegramBot;
 
 int main()
 {
-	Telegram tg("your bot api", "your chat id"); 
+	Telegram tg("your bot api", "your chat id");
 
 	tg.Send_Message("The computer is on! Example commands:  /cmd  /exit  /shutdown  /pwd ");	//start message
 
-	while(tg.Check_Errors())
+	while (tg.Check_Errors())
 	{
 		delay(0.5);
 

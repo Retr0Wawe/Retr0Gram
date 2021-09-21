@@ -12,15 +12,15 @@ namespace TelegramBot
         const char* bot_api;
         const char* chat_id;
     public:
-        Telegram(const char* bot_api, const char* chat_id); //bot_api, chat_id
-
-        ~Telegram();
-
         Telegram& operator=(const Telegram&) = delete;
         Telegram& operator=(const Telegram&&) = delete;
 
         Telegram(const Telegram&) = delete;
         Telegram(Telegram&&) = delete;
+    public:
+        Telegram(const char* bot_api, const char* chat_id); //bot_api, chat_id
+
+        ~Telegram();
 
         bool Check_Errors();
 
