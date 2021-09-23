@@ -22,7 +22,7 @@ namespace TelegramBot
 
         ~Telegram();
 
-        bool Check_Errors();
+        int Check_Errors();
 
         std::string Get_Last_Message();
 

@@ -11,10 +11,14 @@ typedef void* HINTERNET;
 class Requests
 {
 private:
+	const char* url;
+	const char* useragent;
 	HINTERNET hSocket;
 	HINTERNET hConnection;
 	bool SSL;
 public:
+	mutable int error_code;
+
 	Requests& operator=(const Requests&) = delete;
 	Requests& operator=(const Requests&&) = delete;
 
@@ -28,6 +32,8 @@ public:
 	~Requests();
 
 	std::string Send_Request_Get(const char* path, const char* content) const;
+
+	int Init();
 };
 
 #endif

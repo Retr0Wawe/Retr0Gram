@@ -3,13 +3,27 @@
 #include <iostream>
 #include <wininet.h>
 
-Requests::Requests(const char* useragent, const char* url, bool https = 0) : SSL(https)
+Requests::Requests(const char* _useragent, const char* _url, bool https = 0) : useragent(_useragent),  url(_url), SSL(https)
+{
+	error_code = Init();
+}
+
+Requests::Requests() : url(nullptr), useragent(nullptr), hSocket(nullptr), hConnection(nullptr), error_code(0), SSL(0)
+{	}
+
+Requests::~Requests()
+{
+	InternetCloseHandle(hSocket);
+	InternetCloseHandle(hConnection);
+}
+
+int Requests::Init()
 {
 	hSocket = InternetOpenA(useragent, INTERNET_OPEN_TYPE_PRECONFIG, 0, 0, 0);
 
 	if (!hSocket) {
 		LOG_CRITICAL("Error to open connection! Error: {0}", GetLastError());
-		exit(1);
+		return -1;
 	}
 
 	hConnection = InternetConnectA(hSocket, url, SSL == true ? INTERNET_DEFAULT_HTTPS_PORT
@@ -17,17 +31,10 @@ Requests::Requests(const char* useragent, const char* url, bool https = 0) : SSL
 
 	if (!hConnection) {
 		LOG_CRITICAL("Error to connect url! Error: {0}", GetLastError());
-		exit(1);
+		return -2;
 	}
-}
 
-Requests::Requests() : hSocket(nullptr), hConnection(nullptr), SSL(0)
-{	}
-
-Requests::~Requests()
-{
-	InternetCloseHandle(hSocket);
-	InternetCloseHandle(hConnection);
+	return 0;
 }
 
 std::string Requests::Send_Request_Get(const char* path, const char* content) const
@@ -44,7 +51,7 @@ std::string Requests::Send_Request_Get(const char* path, const char* content) co
 
 	if (!hRequest) {
 		LOG_CRITICAL("Error to open request! Error: {0}", GetLastError());
-		exit(1);
+		error_code = -4;
 	}
 
 	if (content == "") {

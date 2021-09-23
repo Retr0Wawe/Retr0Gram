@@ -18,7 +18,7 @@ namespace TelegramBot
 	{
 		std::string content = "bot" + std::string(bot_api) + "/sendMessage?text=" + message + "&chat_id=" + chat_id;
 
-		LOG_INFO("Send message: '{0}'", message);
+		LOG_INFO("Send message: ['{0}']", message);
 
 		try {
 			std::string get_request = Requests::Send_Request_Get(content.c_str(), nullptr);
@@ -68,9 +68,14 @@ namespace TelegramBot
 		return text != past_message ? past_message = text : "";
 	}
 
-	bool Telegram::Check_Errors()
+	int Telegram::Check_Errors()
 	{
-		return true;
+		if (error_code) {
+			LOG_CRITICAL("Program initialization error!");
+			error_code = -4;
+		}
+
+		return error_code;
 	}
 
 	void delay(double seconds)
