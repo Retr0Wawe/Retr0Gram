@@ -51,7 +51,7 @@ std::string Requests::Send_Request_Get(const char* path, const char* content) co
 
 	if (!hRequest) {
 		LOG_CRITICAL("Error to open request! Error: {0}", GetLastError());
-		error_code = -4;
+		error_code = -3;
 	}
 
 	if (content == "") {
