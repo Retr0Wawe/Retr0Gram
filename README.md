@@ -1,7 +1,5 @@
 # Retr0Gram
 High-level api for implementing a bot in C++ using http/https requests. 
-## How it works?
-
 ## Download:
 #### git clone --recursive https://github.com/Retr0Wawe/Retr0Gram
 ## Build:
