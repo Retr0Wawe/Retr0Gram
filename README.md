@@ -15,7 +15,7 @@ using namespace TelegramBot;
 #ifdef NDEBUG
   #define main() WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
  #else
-  #define main(...) main(__VA_ARGS__) //for argc, argv
+  #define main(...) main(__VA_ARGS__) 		//for argc, argv
 #endif
 
 int main()
